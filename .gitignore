@@ -1,0 +1,9 @@
+# Nix build outputs
+result
+result-*
+
+# direnv
+.direnv/
+
+# pre-commit cache
+.pre-commit-cache/

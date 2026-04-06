@@ -1,0 +1,44 @@
+name: Nix Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  nix-checks:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v22
+
+      - name: Cache Nix store
+        uses: nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('flake.lock') }}
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+          gc-max-store-size-macos: 2G
+          purge: true
+          purge-prefixes: nix-${{ runner.os }}-
+          purge-created: 30d
+
+      - name: Format check
+        run: nix run nixpkgs#nixfmt-tree -- --ci
+
+      - name: Lint
+        run: nix run nixpkgs#statix -- check
+
+      - name: Flake check
+        run: nix flake check
+
+      - name: Build
+        run: nix build .#darwinConfigurations.Alexandre-MacBook.system

@@ -1,0 +1,38 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: https://github.com/NixOS/nixfmt
+    rev: v1.2.0
+    hooks:
+      - id: nixfmt-nix
+
+  - repo: local
+    hooks:
+      - id: flake-check
+        name: Nix flake check
+        description: Validate the Nix flake evaluates correctly
+        entry: nix flake check
+        language: system
+        pass_filenames: false
+        types: [nix]
+
+      - id: statix-lint
+        name: Statix lint
+        description: Lint Nix files for anti-patterns
+        entry: nix run nixpkgs#statix -- check
+        language: system
+        pass_filenames: false
+        types: [nix]
