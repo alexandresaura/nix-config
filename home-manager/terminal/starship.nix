@@ -13,7 +13,6 @@
       git_branch.style = "bold #ff79c6";
       git_status.style = "bold #ff5555";
       username = {
-        show_always = true;
         format = "[$user]($style) on ";
         style_user = "bold #bd93f9";
       };

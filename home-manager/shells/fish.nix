@@ -12,6 +12,19 @@
 
   home.file.".config/fish/themes/Dracula Official.theme".text = ''
     # Dracula Color Palette
+    #
+    # Foreground: f8f8f2
+    # Selection: 44475a
+    # Comment: 6272a4
+    # Red: ff5555
+    # Orange: ffb86c
+    # Yellow: f1fa8c
+    # Green: 50fa7b
+    # Purple: bd93f9
+    # Cyan: 8be9fd
+    # Pink: ff79c6
+
+    # Syntax Highlighting Colors
     fish_color_normal f8f8f2
     fish_color_command 8be9fd
     fish_color_keyword ff79c6
