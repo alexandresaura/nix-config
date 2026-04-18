@@ -32,7 +32,7 @@ rebuild   # re-applies the configuration
 ### System (nix-darwin)
 
 - **Packages** &mdash; coreutils, curl, git, htop, wget
-- **Fonts** &mdash; Fira Code Nerd Font
+- **Fonts** &mdash; JetBrains Mono Nerd Font
 - **Shells** &mdash; bash, zsh, fish (with babelfish)
 - **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `nix-community.cachix.org` as an extra binary cache
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation

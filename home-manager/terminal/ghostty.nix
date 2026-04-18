@@ -17,7 +17,7 @@ in
       theme = "dracula";
 
       # Font
-      font-family = "FiraCode Nerd Font";
+      font-family = "JetBrainsMono Nerd Font";
       font-size = 14;
       font-thicken = true;
 
