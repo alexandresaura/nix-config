@@ -1,3 +1,8 @@
+{ lib, dracula, ... }:
+let
+  # Ghostty's non-palette theme fields want bare hex (no leading #).
+  hex = lib.removePrefix "#";
+in
 {
   programs.ghostty = {
     enable = true;
@@ -47,20 +52,20 @@
 
     themes = {
       dracula = {
-        background = "282a36";
-        foreground = "f8f8f2";
-        cursor-color = "f8f8f2";
-        cursor-text = "282a36";
+        background = hex dracula.background;
+        foreground = hex dracula.foreground;
+        cursor-color = hex dracula.foreground;
+        cursor-text = hex dracula.background;
         palette = [
           "0=#21222c"
-          "1=#ff5555"
-          "2=#50fa7b"
-          "3=#f1fa8c"
-          "4=#bd93f9"
-          "5=#ff79c6"
-          "6=#8be9fd"
-          "7=#f8f8f2"
-          "8=#6272a4"
+          "1=${dracula.red}"
+          "2=${dracula.green}"
+          "3=${dracula.yellow}"
+          "4=${dracula.purple}"
+          "5=${dracula.pink}"
+          "6=${dracula.cyan}"
+          "7=${dracula.foreground}"
+          "8=${dracula.comment}"
           "9=#ff6e6e"
           "10=#69ff94"
           "11=#ffffa5"
@@ -69,8 +74,8 @@
           "14=#a4ffff"
           "15=#ffffff"
         ];
-        selection-background = "44475a";
-        selection-foreground = "f8f8f2";
+        selection-background = hex dracula.selection;
+        selection-foreground = hex dracula.foreground;
       };
     };
   };

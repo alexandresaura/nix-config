@@ -9,8 +9,6 @@ in
 {
   programs.git = {
     enable = true;
-    userName = "Alexandre Saura";
-    userEmail = "alexandresaura21@gmail.com";
     signing = {
       signByDefault = true;
     };
@@ -34,7 +32,7 @@ in
       ".claude/settings.local.json"
       "playwright-mcp/"
     ];
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
       core.editor = "nvim";
 
@@ -46,7 +44,11 @@ in
         autoSetupRemote = true;
       };
 
-      user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKPrWF3O1t0epeH4hjMgyYCvDpxGc116N7awG6ywbXm";
+      user = {
+        name = "Alexandre Saura";
+        email = "alexandresaura21@gmail.com";
+        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKPrWF3O1t0epeH4hjMgyYCvDpxGc116N7awG6ywbXm";
+      };
       gpg = {
         format = "ssh";
         ssh.program = onePassSign;

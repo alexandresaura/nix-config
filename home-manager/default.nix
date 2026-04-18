@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
+    ./theme/dracula.nix
+
     ./shells/fish.nix
     ./shells/zsh.nix
 
@@ -9,11 +11,13 @@
     ./terminal/fzf.nix
     ./terminal/eza.nix
     ./terminal/zoxide.nix
+    ./terminal/bat.nix
 
     ./dev/git.nix
     ./dev/ssh.nix
     ./dev/mise.nix
     ./dev/direnv.nix
+    ./dev/lazygit.nix
 
     ./editors/neovim.nix
   ];
@@ -26,16 +30,13 @@
     stateVersion = "25.11";
 
     packages = with pkgs; [
-      bat
       fd
       gh
       jq
-      lazygit
       nixfmt
       pre-commit
       ripgrep
       statix
-      tmux
       tree
     ];
 
@@ -46,7 +47,6 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
-      TERM = "xterm-256color";
     };
 
     file = {

@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./homebrew.nix
@@ -10,8 +11,6 @@
     computerName = "Alexandre MacBook";
   };
 
-  nix.enable = true;
-
   system = {
     stateVersion = 6;
     primaryUser = "alexandre";
@@ -23,6 +22,8 @@
   };
 
   nix = {
+    enable = true;
+    package = pkgs.lix;
     settings = {
       experimental-features = [
         "nix-command"
@@ -32,7 +33,12 @@
         "@admin"
         "alexandre"
       ];
+      extra-substituters = [ "https://nix-community.cachix.org" ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
+    optimise.automatic = true;
     gc = {
       automatic = true;
       options = "--delete-older-than 14d";

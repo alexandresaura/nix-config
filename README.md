@@ -7,7 +7,7 @@ One command rebuilds the entire system: packages, apps, shell setup, terminal th
 ## Prerequisites
 
 - macOS on Apple Silicon (aarch64-darwin)
-- [Nix](https://nixos.org/download/) with flakes enabled (the [Determinate Systems installer](https://github.com/DeterminateSystems/nix-installer) is recommended)
+- [Nix](https://nixos.org/download/) with flakes enabled (the [Determinate Systems installer](https://github.com/DeterminateSystems/nix-installer) is recommended). Once activated this config pins the daemon to [Lix](https://lix.systems/) via `nix.package = pkgs.lix`.
 - [Homebrew](https://brew.sh/) (nix-darwin manages it declaratively, but it must be installed first)
 
 ## Getting Started
@@ -34,9 +34,10 @@ rebuild   # re-applies the configuration
 - **Packages** &mdash; coreutils, curl, git, htop, wget
 - **Fonts** &mdash; Fira Code Nerd Font
 - **Shells** &mdash; bash, zsh, fish (with babelfish)
+- **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `nix-community.cachix.org` as an extra binary cache
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation
   - **Brews** &mdash; awscli, nginx, redis, yarn, libyaml, tree-sitter-cli
-  - **Casks** &mdash; 1Password, Arc, Bruno, Claude Code, CleanShot, Cursor, DBeaver, DevToys, Discord, Docker Desktop, Ghostty, Insomnia, Karabiner Elements, ngrok, Raycast, Spotify, VS Code, Warp
+  - **Casks** &mdash; 1Password, Arc, Bruno, Claude Code, CleanShot, Cursor, DBeaver, Discord, Docker Desktop, Ghostty, Insomnia, Karabiner Elements, ngrok, Orion, Raycast, Spotify, VS Code
 - **macOS preferences** &mdash; dark mode, dock auto-hide, Finder column view with hidden files visible, Caps Lock remapped to Control, fast key repeat, Touch ID for sudo, Stage Manager
 
 ### User Environment (Home Manager)
@@ -44,29 +45,31 @@ rebuild   # re-applies the configuration
 | Category | Tools |
 |----------|-------|
 | **Shells** | fish (Dracula theme), zsh (autosuggestions, syntax highlighting) |
-| **Terminal** | Ghostty, Starship prompt, fzf, eza, zoxide |
-| **Dev** | git (SSH signing via 1Password), SSH (1Password agent), mise (erlang, node, python, ruby, rust, elixir), direnv |
+| **Terminal** | Ghostty, Starship prompt, fzf, eza, zoxide, bat |
+| **Dev** | git (SSH signing via 1Password), SSH (1Password agent), mise (erlang, node, python, ruby, rust, elixir), direnv, lazygit |
 | **Editor** | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code) |
-| **CLI tools** | bat, fd, gh, jq, lazygit, ripgrep, tmux, tree |
+| **CLI tools** | fd, gh, jq, ripgrep, tree |
 
-All terminal tools share a consistent **Dracula** color theme.
+All terminal tools share a consistent **Dracula** color theme via a single palette module at `home-manager/theme/dracula.nix`, exposed to every home-manager module as `dracula`.
 
 ## Repository Structure
 
 ```
 flake.nix                  # Entrypoint: inputs, darwin config, dev shell
 darwin/
-  default.nix              # Networking, nix settings, garbage collection
+  default.nix              # Networking, nix settings (Lix, optimise, caches, GC)
   homebrew.nix             # Brews and casks
   packages.nix             # System packages, fonts, shells
   macos.nix                # macOS system preferences
 home-manager/
   default.nix              # User packages, aliases, session variables
+  theme/dracula.nix        # Shared Dracula color palette (passed as `dracula` module arg)
   shells/                  # fish, zsh
-  terminal/                # ghostty, starship, fzf, eza, zoxide
-  dev/                     # git, ssh, mise, direnv
+  terminal/                # ghostty, starship, fzf, eza, zoxide, bat
+  dev/                     # git, ssh, mise, direnv, lazygit
   editors/                 # neovim
 configs/nvim/              # Neovim config (symlinked to ~/.config/nvim)
+wallpapers/                # Wallpaper assets deployed via home.file
 ```
 
 ## Development

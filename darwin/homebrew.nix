@@ -1,6 +1,4 @@
 {
-  environment.systemPath = [ "/opt/homebrew/bin" ];
-
   homebrew = {
     enable = true;
     onActivation = {
@@ -26,7 +24,6 @@
       "cleanshot"
       "cursor"
       "dbeaver-community"
-      "devtoys"
       "discord"
       "docker-desktop"
       "ghostty"
@@ -37,7 +34,6 @@
       "raycast"
       "spotify"
       "visual-studio-code"
-      "warp"
     ];
   };
 }
