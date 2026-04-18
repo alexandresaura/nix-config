@@ -33,6 +33,7 @@
       "insomnia"
       "karabiner-elements"
       "ngrok"
+      "orion"
       "raycast"
       "spotify"
       "visual-studio-code"

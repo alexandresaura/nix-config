@@ -40,7 +40,7 @@
     ];
 
     shellAliases = {
-      rebuild = "sudo darwin-rebuild switch --flake ~/.config/nix-config";
+      rebuild = "sudo darwin-rebuild switch --flake ~/.config/nix-config#Alexandre-MacBook";
     };
 
     sessionVariables = {
@@ -56,6 +56,9 @@
       };
       ".hushlogin" = {
         text = "";
+      };
+      "Pictures/Wallpapers/dracula-mountain.png" = {
+        source = ../wallpapers/dracula-mountain.png;
       };
     };
   };
