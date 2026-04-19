@@ -1,5 +1,5 @@
 {
-  description = "macOS system configuration";
+  description = "Declarative macOS system configuration with nix-darwin, home-manager, and Lix";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -9,6 +9,10 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    _1password-shell-plugins = {
+      url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -38,23 +42,8 @@
           inherit inputs pkgs;
         };
         modules = [
-          {
-            system.configurationRevision = self.rev or self.dirtyRev or null;
-            nixpkgs.hostPlatform = system;
-          }
-
-          ./darwin
-
           home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-              backupFileExtension = "backup";
-              users.alexandre = import ./home-manager;
-            };
-          }
+          ./darwin
         ];
       };
 

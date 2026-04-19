@@ -42,7 +42,7 @@ Modules are split into two trees:
   - `theme/` — shared color palettes (currently `dracula.nix`) exposed to every module via `_module.args`
   - `shells/` — fish, zsh
   - `terminal/` — ghostty, starship, fzf, eza, zoxide, bat
-  - `dev/` — git, ssh, mise, direnv, lazygit
+  - `dev/` — git, ssh, mise, direnv, lazygit, 1Password shell plugins (`onepassword.nix`)
   - `editors/` — neovim (thin wrapper; actual config lives in `configs/nvim/`)
 
 **configs/nvim/** contains a LazyVim-based Neovim setup with Lua files, symlinked into `~/.config/nvim` via `home.file`.
@@ -53,4 +53,4 @@ Modules are split into two trees:
 - Shell integrations (bash, zsh, fish) are enabled in parallel for tools like fzf, zoxide, eza, starship.
 - 1Password is the central secrets/signing backend (SSH agent, git commit signing).
 - Each tool gets its own `.nix` file — follow this pattern when adding new modules.
-- `specialArgs = { inherit inputs pkgs; }` passes flake inputs and pkgs to all modules.
+- `specialArgs = { inherit inputs pkgs; }` passes flake inputs and pkgs to darwin modules. Home-manager modules receive `inputs` via `extraSpecialArgs` and pkgs via `useGlobalPkgs = true`.

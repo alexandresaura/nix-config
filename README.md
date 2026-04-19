@@ -46,7 +46,7 @@ rebuild   # re-applies the configuration
 |----------|-------|
 | **Shells** | fish (Dracula theme), zsh (autosuggestions, syntax highlighting) |
 | **Terminal** | Ghostty, Starship prompt, fzf, eza, zoxide, bat |
-| **Dev** | git (SSH signing via 1Password), SSH (1Password agent), mise (erlang, node, python, ruby, rust, elixir), direnv, lazygit |
+| **Dev** | git (SSH signing via 1Password), SSH (1Password agent), 1Password shell plugins (gh), mise (erlang, node, python, ruby, rust, elixir), direnv, lazygit |
 | **Editor** | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code) |
 | **CLI tools** | fd, gh, jq, ripgrep, tree |
 
@@ -66,7 +66,7 @@ home-manager/
   theme/dracula.nix        # Shared Dracula color palette (passed as `dracula` module arg)
   shells/                  # fish, zsh
   terminal/                # ghostty, starship, fzf, eza, zoxide, bat
-  dev/                     # git, ssh, mise, direnv, lazygit
+  dev/                     # git, ssh, mise, direnv, lazygit, 1Password shell plugins
   editors/                 # neovim
 configs/nvim/              # Neovim config (symlinked to ~/.config/nvim)
 wallpapers/                # Wallpaper assets deployed via home.file

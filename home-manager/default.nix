@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
+    inputs._1password-shell-plugins.hmModules.default
+
     ./theme/dracula.nix
 
     ./shells/fish.nix
@@ -18,6 +20,7 @@
     ./dev/mise.nix
     ./dev/direnv.nix
     ./dev/lazygit.nix
+    ./dev/onepassword.nix
 
     ./editors/neovim.nix
   ];
@@ -31,7 +34,6 @@
 
     packages = with pkgs; [
       fd
-      gh
       jq
       nixfmt
       pre-commit

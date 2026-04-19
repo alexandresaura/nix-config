@@ -18,7 +18,6 @@ in
 
       # Font
       font-family = "JetBrainsMono Nerd Font";
-      font-size = 14;
       font-thicken = true;
 
       # Cursor

@@ -1,10 +1,20 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./homebrew.nix
     ./packages.nix
     ./macos.nix
   ];
+
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = "backup";
+    users.alexandre = import ../home-manager;
+  };
 
   networking = {
     hostName = "Alexandre-MacBook";
