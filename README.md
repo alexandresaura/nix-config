@@ -36,7 +36,7 @@ rebuild   # re-applies the configuration
 - **Shells** &mdash; bash, zsh, fish (with babelfish)
 - **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `nix-community.cachix.org` as an extra binary cache
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation
-  - **Brews** &mdash; awscli, nginx, redis, yarn, libyaml, tree-sitter-cli
+  - **Brews** &mdash; nginx, redis
   - **Casks** &mdash; 1Password, Arc, Bruno, Claude Code, CleanShot, Cursor, DBeaver, Discord, Docker Desktop, Ghostty, Insomnia, Karabiner Elements, ngrok, Orion, Raycast, Spotify, VS Code
 - **macOS preferences** &mdash; dark mode, dock auto-hide, Finder column view with hidden files visible, Caps Lock remapped to Control, fast key repeat, Touch ID for sudo, Stage Manager
 
@@ -48,7 +48,7 @@ rebuild   # re-applies the configuration
 | **Terminal** | Ghostty, Starship prompt, fzf, eza, zoxide, bat |
 | **Dev** | git (SSH signing via 1Password), SSH (1Password agent), 1Password shell plugins (gh), mise (erlang, node, python, ruby, rust, elixir), direnv, lazygit |
 | **Editor** | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code) |
-| **CLI tools** | fd, gh, jq, ripgrep, tree |
+| **CLI tools** | awscli2, fd, gh, jq, libyaml, ripgrep, tree, tree-sitter, yarn |
 
 All terminal tools share a consistent **Dracula** color theme via a single palette module at `home-manager/theme/dracula.nix`, exposed to every home-manager module as `dracula`.
 

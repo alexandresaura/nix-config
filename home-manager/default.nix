@@ -33,13 +33,17 @@
     stateVersion = "25.11";
 
     packages = with pkgs; [
+      awscli2
       fd
       jq
+      libyaml
       nixfmt
       pre-commit
       ripgrep
       statix
       tree
+      tree-sitter
+      yarn
     ];
 
     shellAliases = {

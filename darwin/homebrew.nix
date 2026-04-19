@@ -8,12 +8,8 @@
     };
 
     brews = [
-      "awscli"
       "nginx"
       "redis"
-      "yarn"
-      "libyaml"
-      "tree-sitter-cli"
     ];
 
     casks = [

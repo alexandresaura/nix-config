@@ -37,7 +37,7 @@ Pre-commit hooks run automatically: trailing whitespace, nixfmt, statix lint, fl
 
 Modules are split into two trees:
 
-- **darwin/** — system-level: homebrew casks/brews (`homebrew.nix`), system packages and shells (`packages.nix`), macOS preferences (`macos.nix`), core nix/networking settings (`default.nix`)
+- **darwin/** — system-level: homebrew casks and service brews (`homebrew.nix`), system packages and shells (`packages.nix`), macOS preferences (`macos.nix`), core nix/networking settings (`default.nix`)
 - **home-manager/** — user-level, organized by category:
   - `theme/` — shared color palettes (currently `dracula.nix`) exposed to every module via `_module.args`
   - `shells/` — fish, zsh
