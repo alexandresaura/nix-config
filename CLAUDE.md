@@ -37,11 +37,11 @@ Pre-commit hooks run automatically: trailing whitespace, nixfmt, statix lint, fl
 
 Modules are split into two trees:
 
-- **darwin/** — system-level: homebrew casks and service brews (`homebrew.nix`), system packages and shells (`packages.nix`), macOS preferences (`macos.nix`), core nix/networking settings (`default.nix`)
+- **darwin/** — system-level: homebrew casks and service brews (`homebrew.nix`), coreutils/fonts/shells (`packages.nix`), macOS preferences (`macos.nix`), core nix/networking settings (`default.nix`)
 - **home-manager/** — user-level, organized by category:
   - `theme/` — shared color palettes (currently `dracula.nix`) exposed to every module via `_module.args`
   - `shells/` — fish, zsh
-  - `terminal/` — ghostty, starship, fzf, eza, zoxide, bat
+  - `terminal/` — ghostty, starship, fzf, eza, zoxide, bat, btop
   - `dev/` — git, ssh, mise, direnv, lazygit, 1Password shell plugins (`onepassword.nix`)
   - `editors/` — neovim (thin wrapper; actual config lives in `configs/nvim/`)
 
@@ -49,7 +49,7 @@ Modules are split into two trees:
 
 ## Patterns to Know
 
-- Dracula color theme is applied consistently across fish, ghostty, starship, and fzf. The palette lives in `home-manager/theme/dracula.nix` and is passed to every module as the `dracula` arg — always reference `dracula.purple`, `dracula.background`, etc. instead of hardcoding hex. Use `lib.removePrefix "#"` when a tool needs bare hex.
+- Dracula color theme is applied consistently across fish, ghostty, starship, fzf, bat, btop, and lazygit. The palette lives in `home-manager/theme/dracula.nix` and is passed to every module as the `dracula` arg — always reference `dracula.purple`, `dracula.background`, etc. instead of hardcoding hex. Use `lib.removePrefix "#"` when a tool needs bare hex.
 - Shell integrations (bash, zsh, fish) are enabled in parallel for tools like fzf, zoxide, eza, starship.
 - 1Password is the central secrets/signing backend (SSH agent, git commit signing).
 - Each tool gets its own `.nix` file — follow this pattern when adding new modules.

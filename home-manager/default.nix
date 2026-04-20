@@ -14,6 +14,7 @@
     ./terminal/eza.nix
     ./terminal/zoxide.nix
     ./terminal/bat.nix
+    ./terminal/btop.nix
 
     ./dev/git.nix
     ./dev/ssh.nix
@@ -34,15 +35,19 @@
 
     packages = with pkgs; [
       awscli2
+      curl
+      fastfetch
       fd
+      gh
       jq
+      lazysql
       libyaml
       nixfmt
       pre-commit
       ripgrep
       statix
-      tree
       tree-sitter
+      wget
       yarn
     ];
 
@@ -53,6 +58,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
+      RUBY_CONFIGURE_OPTS = "CFLAGS=-I${pkgs.libyaml.dev}/include LDFLAGS=-L${pkgs.libyaml}/lib";
     };
 
     file = {

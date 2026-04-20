@@ -31,13 +31,13 @@ rebuild   # re-applies the configuration
 
 ### System (nix-darwin)
 
-- **Packages** &mdash; coreutils, curl, git, htop, wget
+- **Packages** &mdash; coreutils
 - **Fonts** &mdash; JetBrains Mono Nerd Font
 - **Shells** &mdash; bash, zsh, fish (with babelfish)
 - **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `nix-community.cachix.org` as an extra binary cache
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation
   - **Brews** &mdash; nginx, redis
-  - **Casks** &mdash; 1Password, Arc, Bruno, Claude Code, CleanShot, Cursor, DBeaver, Discord, Docker Desktop, Ghostty, Insomnia, Karabiner Elements, ngrok, Orion, Raycast, Spotify, VS Code
+  - **Casks** &mdash; 1Password, Arc, Bruno, Claude Code, CleanShot, Cursor, Discord, Docker Desktop, Ghostty, Insomnia, Karabiner Elements, Orion, Raycast, Spotify, VS Code
 - **macOS preferences** &mdash; dark mode, dock auto-hide, Finder column view with hidden files visible, Caps Lock remapped to Control, fast key repeat, Touch ID for sudo, Stage Manager
 
 ### User Environment (Home Manager)
@@ -45,10 +45,10 @@ rebuild   # re-applies the configuration
 | Category | Tools |
 |----------|-------|
 | **Shells** | fish (Dracula theme), zsh (autosuggestions, syntax highlighting) |
-| **Terminal** | Ghostty, Starship prompt, fzf, eza, zoxide, bat |
+| **Terminal** | Ghostty, Starship prompt, fzf, eza, zoxide, bat, btop |
 | **Dev** | git (SSH signing via 1Password), SSH (1Password agent), 1Password shell plugins (gh), mise (erlang, node, python, ruby, rust, elixir), direnv, lazygit |
 | **Editor** | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code) |
-| **CLI tools** | awscli2, fd, gh, jq, libyaml, ripgrep, tree, tree-sitter, yarn |
+| **CLI tools** | awscli2, curl, fastfetch, fd, gh, jq, lazysql, libyaml, ripgrep, tree-sitter, wget, yarn |
 
 All terminal tools share a consistent **Dracula** color theme via a single palette module at `home-manager/theme/dracula.nix`, exposed to every home-manager module as `dracula`.
 
@@ -65,7 +65,7 @@ home-manager/
   default.nix              # User packages, aliases, session variables
   theme/dracula.nix        # Shared Dracula color palette (passed as `dracula` module arg)
   shells/                  # fish, zsh
-  terminal/                # ghostty, starship, fzf, eza, zoxide, bat
+  terminal/                # ghostty, starship, fzf, eza, zoxide, bat, btop
   dev/                     # git, ssh, mise, direnv, lazygit, 1Password shell plugins
   editors/                 # neovim
 configs/nvim/              # Neovim config (symlinked to ~/.config/nvim)

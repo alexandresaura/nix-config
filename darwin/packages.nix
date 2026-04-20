@@ -3,10 +3,6 @@
   environment = {
     systemPackages = with pkgs; [
       coreutils
-      curl
-      git
-      htop
-      wget
     ];
     pathsToLink = [ "/Applications" ];
   };
