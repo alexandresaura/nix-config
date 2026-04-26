@@ -18,8 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v22
+      - name: Install Lix
+        run: |
+          curl -sSf -L https://install.lix.systems/lix | \
+            sh -s -- install --no-confirm \
+              --extra-conf "trusted-users = root runner"
+          echo "/nix/var/nix/profiles/default/bin" >> "$GITHUB_PATH"
 
       - name: Cache Nix store
         uses: nix-community/cache-nix-action@v7
