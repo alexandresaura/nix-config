@@ -15,6 +15,9 @@
       url = "github:1Password/shell-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tmux-powerkit = {
+      url = "github:fabioluciano/tmux-powerkit";
+    };
   };
 
   outputs =
@@ -49,7 +52,7 @@
 
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          nixfmt-rfc-style
+          nixfmt
           statix
         ];
       };

@@ -16,6 +16,7 @@
       "1password"
       "arc"
       "bruno"
+      "claude"
       "claude-code"
       "cleanshot"
       "cursor"
@@ -23,10 +24,10 @@
       "docker-desktop"
       "ghostty"
       "insomnia"
-      "karabiner-elements"
       "orion"
       "raycast"
       "spotify"
+      "ticktick"
       "visual-studio-code"
     ];
   };

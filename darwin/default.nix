@@ -43,8 +43,12 @@
         "@admin"
         "alexandre"
       ];
-      extra-substituters = [ "https://nix-community.cachix.org" ];
+      extra-substituters = [
+        "https://cache.lix.systems"
+        "https://nix-community.cachix.org"
+      ];
       extra-trusted-public-keys = [
+        "cache.lix.systems-1:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRpIarfA="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };

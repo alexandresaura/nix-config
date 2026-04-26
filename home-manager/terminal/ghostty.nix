@@ -1,4 +1,9 @@
-{ lib, dracula, ... }:
+{
+  pkgs,
+  lib,
+  dracula,
+  ...
+}:
 let
   # Ghostty's non-palette theme fields want bare hex (no leading #).
   hex = lib.removePrefix "#";
@@ -30,7 +35,6 @@ in
       window-padding-balance = true;
       window-padding-color = "background";
       window-save-state = "never";
-      window-inherit-working-directory = true;
 
       # macOS
       macos-option-as-alt = true;
@@ -38,14 +42,17 @@ in
       macos-window-shadow = true;
 
       # Shell
-      command = "/etc/profiles/per-user/alexandre/bin/fish";
+      command = "${pkgs.fish}/bin/fish";
 
       # Behavior
       clipboard-trim-trailing-spaces = true;
       scrollback-limit = 10000000;
       link-url = true;
 
-      # Splits
+      # Splits / tabs / windows working directory behaviour
+      split-inherit-working-directory = true;
+      tab-inherit-working-directory = false;
+      window-inherit-working-directory = false;
       unfocused-split-opacity = 0.85;
     };
 

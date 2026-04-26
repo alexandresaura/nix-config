@@ -15,6 +15,7 @@
     ./terminal/zoxide.nix
     ./terminal/bat.nix
     ./terminal/btop.nix
+    ./terminal/tmux.nix
 
     ./dev/git.nix
     ./dev/ssh.nix
@@ -22,6 +23,7 @@
     ./dev/direnv.nix
     ./dev/lazygit.nix
     ./dev/onepassword.nix
+    ./dev/claude-code.nix
 
     ./editors/neovim.nix
   ];
@@ -39,6 +41,7 @@
       fastfetch
       fd
       gh
+      gitleaks
       jq
       lazysql
       libyaml

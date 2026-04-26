@@ -12,26 +12,6 @@ in
     signing = {
       signByDefault = true;
     };
-    ignores = [
-      # macOS
-      ".DS_Store"
-      "._*"
-      ".AppleDouble"
-      ".Spotlight-V100"
-      ".Trashes"
-
-      # Editors
-      ".vscode/"
-      ".idea/"
-      "*.swp"
-      "*~"
-      "\\#*\\#"
-      ".\\#*"
-
-      # Claude Code
-      ".claude/settings.local.json"
-      "playwright-mcp/"
-    ];
     settings = {
       init.defaultBranch = "main";
       core.editor = "nvim";
@@ -53,6 +33,28 @@ in
         format = "ssh";
         ssh.program = onePassSign;
       };
+      credential.helper = "";
+      credential."https://github.com".helper = "!${lib.getExe pkgs.gh} auth git-credential";
     };
+    ignores = [
+      # macOS
+      ".DS_Store"
+      "._*"
+      ".AppleDouble"
+      ".Spotlight-V100"
+      ".Trashes"
+
+      # Editors
+      ".vscode/"
+      ".idea/"
+      "*.swp"
+      "*~"
+      "\\#*\\#"
+      ".\\#*"
+
+      # Claude Code
+      ".claude/settings.local.json"
+      "playwright-mcp/"
+    ];
   };
 }
