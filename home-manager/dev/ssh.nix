@@ -6,6 +6,8 @@ let
       "'~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock'"
     else
       "~/.1password/agent.sock";
+
+  tomlFormat = pkgs.formats.toml { };
 in
 {
   programs.ssh = {
@@ -37,15 +39,12 @@ in
     ".ssh/workgit.pub".text =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMldVFujFDZwY3IwfZkPcNUyE/dB5mz+GNLbaj4a4KUL\n";
 
-    ".config/1Password/ssh/agent.toml".text = ''
-      [[ssh-keys]]
-      vault = "Personal"
-
-      [[ssh-keys]]
-      vault = "Codeminer42"
-
-      [[ssh-keys]]
-      vault = "GoDaddy"
-    '';
+    ".config/1Password/ssh/agent.toml".source = tomlFormat.generate "1password-agent.toml" {
+      ssh-keys = [
+        { vault = "Personal"; }
+        { vault = "Codeminer42"; }
+        { vault = "GoDaddy"; }
+      ];
+    };
   };
 }

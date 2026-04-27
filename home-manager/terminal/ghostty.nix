@@ -30,8 +30,8 @@ in
       cursor-style-blink = true;
 
       # Window
-      window-padding-x = 10;
-      window-padding-y = 10;
+      window-padding-x = 8;
+      window-padding-y = 8;
       window-padding-balance = true;
       window-padding-color = "background";
       window-save-state = "never";

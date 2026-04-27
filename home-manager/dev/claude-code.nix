@@ -1,9 +1,12 @@
 {
+  pkgs,
   lib,
   dracula,
   ...
 }:
 let
+  tomlFormat = pkgs.formats.toml { };
+
   # ANSI 24-bit truecolor sequences need "R;G;B" — convert from "#rrggbb".
   hexDigit =
     c:
@@ -65,17 +68,11 @@ in
       text = statusline;
     };
 
-    ".claude/starship-statusline.toml".text = ''
-      format = "$directory$git_branch$git_status"
-
-      [directory]
-      style = "bold ${dracula.green}"
-
-      [git_branch]
-      style = "bold ${dracula.pink}"
-
-      [git_status]
-      style = "bold ${dracula.red}"
-    '';
+    ".claude/starship-statusline.toml".source = tomlFormat.generate "starship-statusline.toml" {
+      format = "$directory$git_branch$git_status";
+      directory.style = "bold ${dracula.green}";
+      git_branch.style = "bold ${dracula.pink}";
+      git_status.style = "bold ${dracula.red}";
+    };
   };
 }

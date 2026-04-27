@@ -39,13 +39,14 @@ Pre-commit hooks run automatically: trailing whitespace, nixfmt, statix lint, fl
 
 Modules are split into two trees:
 
-- **darwin/** — system-level: homebrew casks and service brews (`homebrew.nix`), coreutils/fonts/shells (`packages.nix`), macOS preferences (`macos.nix`), core nix/networking settings (`default.nix`)
+- **darwin/** — system-level: homebrew casks (`homebrew.nix`), coreutils/fonts/shells (`packages.nix`), macOS preferences (`macos.nix`), launchd user agents under `services/` (autoraise, nginx, redis), core nix/networking settings (`default.nix`)
 - **home-manager/** — user-level, organized by category:
   - `theme/` — shared color palettes (currently `dracula.nix`) exposed to every module via `_module.args`
   - `shells/` — fish, zsh
   - `terminal/` — ghostty, tmux, starship, fzf, eza, zoxide, bat, btop
   - `dev/` — git, ssh, mise, direnv, lazygit, 1Password shell plugins (`onepassword.nix`), Claude Code statusline (`claude-code.nix`)
   - `editors/` — neovim (thin wrapper; actual config lives in `configs/nvim/`)
+  - `desktop/` — desktop / window-management: aerospace
 
 **configs/nvim/** contains a LazyVim-based Neovim setup with Lua files, symlinked into `~/.config/nvim` via `home.file`.
 
@@ -61,3 +62,6 @@ Modules are split into two trees:
 - Ghostty inherits the working directory only on splits (`split-inherit-working-directory = true`); new tabs and windows start at `$HOME`. tmux mirrors this — splits and popups inherit the current pane's `cwd`, but `prefix t` opens a new window at `$HOME`.
 - Each tool gets its own `.nix` file — follow this pattern when adding new modules.
 - `specialArgs = { inherit inputs pkgs; }` passes flake inputs and pkgs to darwin modules. Home-manager modules receive `inputs` via `extraSpecialArgs` and pkgs via `useGlobalPkgs = true`. Use `inputs.<flake>.packages.${pkgs.stdenv.hostPlatform.system}.default` to consume packages from non-nixpkgs flake inputs (see how `tmux-powerkit` is wired in `home-manager/terminal/tmux.nix`).
+- AeroSpace doesn't ship focus-follows-mouse natively. We pair it with **AutoRaise** (`pkgs.autoraise` from nixpkgs — fully declarative; the brew formula's `service do` block runs the binary with no args, defaulting to a 5s hover delay, and brew services can't override args without forking the formula). It runs as a nix-darwin `launchd.user.agent` (see `darwin/services/autoraise.nix`) with `-delay 1` (50ms hover threshold). AutoRaise needs Accessibility permission once on first launch (System Settings → Privacy & Security → Accessibility). Logs land at `/tmp/autoraise.{log,err.log}`.
+- nginx and redis are nix packages (not brews) that run as `launchd.user.agent`s defined in `darwin/services/`. Both use `KeepAlive.SuccessfulExit = false` so a clean `launchctl stop` exits with code 0 and launchd leaves them stopped; the `{nginx,redis}-{start,stop,restart}` aliases in `home-manager/default.nix` are built on this. Do **not** use `launchctl bootout` to stop them — it unloads the service entirely and `kickstart` can no longer find it until the next `rebuild`. External config files live at `~/.config/{nginx,redis}/` (the repo is for *installing* tools, not committing their configs — nginx's main conf may contain work-specific server blocks).
+- AeroSpace is installed via the `nikitabobko/tap` Homebrew cask (upstream's recommended channel — the cask script strips `com.apple.quarantine` and gets autoupdates outside of `rebuild`). Its `aerospace.toml` is rendered declaratively from Nix in `home-manager/desktop/aerospace.nix` via `pkgs.formats.toml.generate` and symlinked into `~/.config/aerospace/aerospace.toml` via `home.file` (matching the rest of this repo — we don't use `xdg.configFile`). Auto-start is handled by AeroSpace itself (`start-at-login = true`) — we deliberately do **not** use home-manager's `programs.aerospace` module because it couples its launchd agent to a non-null `cfg.package`, which would conflict with the brew install. Alt+1..9 are reserved for workspaces; don't bind these in tmux/terminal/nvim. Alt-h/j/k/l drive AeroSpace focus — Ctrl-h/j/k/l stays with `vim-tmux-navigator`.

@@ -7,13 +7,15 @@
       cleanup = "zap";
     };
 
-    brews = [
-      "nginx"
-      "redis"
+    taps = [
+      "nikitabobko/tap"
     ];
+
+    brews = [ ];
 
     casks = [
       "1password"
+      "nikitabobko/tap/aerospace"
       "arc"
       "bruno"
       "claude"

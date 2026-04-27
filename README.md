@@ -36,12 +36,16 @@ rebuild   # re-applies the configuration
 - **Shells** &mdash; bash, zsh, fish (with babelfish)
 - **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `cache.lix.systems` + `nix-community.cachix.org` as extra binary caches
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation
-  - **Brews** &mdash; nginx, redis
+  - **Taps** &mdash; `nikitabobko/tap` (AeroSpace)
   - **Casks**:
     - *Browsers* &mdash; Arc, Orion
     - *Dev & AI* &mdash; Bruno, Claude (Desktop), Claude Code, Cursor, Docker Desktop, Ghostty, Insomnia, VS Code
+    - *Window manager* &mdash; AeroSpace (tiling WM, via the upstream tap)
     - *Utilities* &mdash; 1Password, CleanShot, Raycast, TickTick
     - *Communication & media* &mdash; Discord, Spotify
+- **Background services** (launchd user agents under `darwin/services/`)
+  - **nginx**, **redis** &mdash; installed as Nix packages, started at login. Config files stay outside the repo at `~/.config/{nginx,redis}/`. Manage with the `nginx-{start,stop,restart}` / `redis-{start,stop,restart}` shell aliases.
+  - **AutoRaise** &mdash; focus-follows-mouse companion to AeroSpace (`-delay 1`, 50 ms hover threshold). Needs Accessibility permission once on first launch (System Settings → Privacy & Security → Accessibility).
 - **macOS preferences** &mdash; dark mode, dock auto-hide, Finder column view with hidden files visible, Caps Lock remapped to Control, fast key repeat, Touch ID for sudo (with `reattach` so it survives tmux/screen), Stage Manager
 
 ### User Environment (Home Manager)
@@ -52,6 +56,7 @@ rebuild   # re-applies the configuration
 | **Terminal** | Ghostty, tmux (powerkit + Dracula, vim-tmux-navigator, resurrect/continuum), Starship prompt, fzf, eza, zoxide (aliased to `cd`), bat, btop |
 | **Dev** | git (SSH signing via 1Password, gh credential helper for github.com), SSH (1Password agent), 1Password shell plugins (gh), mise (erlang, node, python, ruby, rust, elixir), direnv, lazygit, Claude Code (Dracula statusline with starship + jq) |
 | **Editor** | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code, vim-tmux-navigator) |
+| **Desktop** | AeroSpace (tiling WM — Alt-h/j/k/l focus, Alt-shift-h/j/k/l move, Alt-1..9 workspaces, service mode on Alt-shift-;) |
 | **CLI tools** | awscli2, curl, fastfetch, fd, gh, gitleaks, jq, lazysql, libyaml, ripgrep, tree-sitter, wget, yarn |
 
 All terminal tools share a consistent **Dracula** color theme via a single palette module at `home-manager/theme/dracula.nix`, exposed to every home-manager module as `dracula`.
@@ -62,9 +67,10 @@ All terminal tools share a consistent **Dracula** color theme via a single palet
 flake.nix                  # Entrypoint: inputs, darwin config, dev shell
 darwin/
   default.nix              # Networking, nix settings (Lix, optimise, caches, GC)
-  homebrew.nix             # Brews and casks
+  homebrew.nix             # Taps, brews, casks
   packages.nix             # System packages, fonts, shells
   macos.nix                # macOS system preferences
+  services/                # launchd user agents: autoraise, nginx, redis
 home-manager/
   default.nix              # User packages, aliases, session variables
   theme/dracula.nix        # Shared Dracula color palette (passed as `dracula` module arg)
@@ -72,6 +78,7 @@ home-manager/
   terminal/                # ghostty, tmux, starship, fzf, eza, zoxide, bat, btop
   dev/                     # git, ssh, mise, direnv, lazygit, 1Password shell plugins, claude-code
   editors/                 # neovim
+  desktop/                 # aerospace (tiling WM, config rendered from Nix)
 configs/nvim/              # Neovim config (symlinked to ~/.config/nvim)
 configs/claude/            # Claude Code statusline template (palette injected at build time)
 wallpapers/                # Wallpaper assets deployed via home.file

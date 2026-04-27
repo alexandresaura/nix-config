@@ -4,6 +4,10 @@
     ./homebrew.nix
     ./packages.nix
     ./macos.nix
+
+    ./services/autoraise.nix
+    ./services/nginx.nix
+    ./services/redis.nix
   ];
 
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;

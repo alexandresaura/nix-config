@@ -26,6 +26,8 @@
     ./dev/claude-code.nix
 
     ./editors/neovim.nix
+
+    ./desktop/aerospace.nix
   ];
 
   programs.home-manager.enable = true;
@@ -56,6 +58,19 @@
 
     shellAliases = {
       rebuild = "sudo darwin-rebuild switch --flake ~/.config/nix-config#Alexandre-MacBook";
+
+      # nginx and redis run as launchd user agents (see darwin/services/).
+      # These mirror `brew services start|stop|restart` muscle memory.
+      # `stop` (not `bootout`) so `start` can re-kickstart without a rebuild —
+      # both services set KeepAlive.SuccessfulExit=false and exit 0 on SIGTERM,
+      # so launchd leaves them stopped until we kickstart again.
+      nginx-start = "launchctl kickstart gui/$(id -u)/org.nixos.nginx";
+      nginx-stop = "launchctl stop gui/$(id -u)/org.nixos.nginx";
+      nginx-restart = "launchctl kickstart -k gui/$(id -u)/org.nixos.nginx";
+
+      redis-start = "launchctl kickstart gui/$(id -u)/org.nixos.redis";
+      redis-stop = "launchctl stop gui/$(id -u)/org.nixos.redis";
+      redis-restart = "launchctl kickstart -k gui/$(id -u)/org.nixos.redis";
     };
 
     sessionVariables = {
