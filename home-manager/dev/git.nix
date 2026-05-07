@@ -55,6 +55,9 @@ in
       # Claude Code
       ".claude/settings.local.json"
       "playwright-mcp/"
+
+      # mise
+      "mise.toml"
     ];
   };
 }

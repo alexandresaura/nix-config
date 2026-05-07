@@ -24,17 +24,17 @@
     ./dev/lazygit.nix
     ./dev/onepassword.nix
     ./dev/claude-code.nix
+    ./dev/editorconfig.nix
 
     ./editors/neovim.nix
-
-    ./desktop/aerospace.nix
   ];
 
   programs.home-manager.enable = true;
 
   home = {
-    username = "alexandre";
-    homeDirectory = "/Users/alexandre";
+    # `home.username` and `home.homeDirectory` are auto-populated by the
+    # nix-darwin HM integration from `users.users.<name>.{name,home}`
+    # (see home-manager/nixos/common.nix). Don't redeclare them here.
     stateVersion = "25.11";
 
     packages = with pkgs; [
@@ -48,6 +48,7 @@
       lazysql
       libyaml
       nixfmt
+      pipx
       pre-commit
       ripgrep
       statix
@@ -57,7 +58,9 @@
     ];
 
     shellAliases = {
-      rebuild = "sudo darwin-rebuild switch --flake ~/.config/nix-config#Alexandre-MacBook";
+      # No `#<host>` suffix — darwin-rebuild auto-detects from the system
+      # hostname (set by `networking.hostName` in darwin/default.nix).
+      rebuild = "sudo darwin-rebuild switch --flake ~/.config/nix-config";
 
       # nginx and redis run as launchd user agents (see darwin/services/).
       # These mirror `brew services start|stop|restart` muscle memory.
@@ -78,6 +81,10 @@
       VISUAL = "nvim";
       RUBY_CONFIGURE_OPTS = "CFLAGS=-I${pkgs.libyaml.dev}/include LDFLAGS=-L${pkgs.libyaml}/lib";
     };
+
+    sessionPath = [
+      "$HOME/.dotnet/tools"
+    ];
 
     file = {
       ".config/nvim" = {

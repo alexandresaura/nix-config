@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   nginxWrapper = pkgs.writeShellScript "nginx-wrapper" ''
     set -e
@@ -19,7 +19,7 @@ in
   # nginx falls back to that path. Ensure it exists and is writable.
   system.activationScripts.extraActivation.text = ''
     mkdir -p /var/log/nginx
-    chown alexandre:staff /var/log/nginx
+    chown ${config.system.primaryUser}:staff /var/log/nginx
   '';
 
   launchd.user.agents.nginx = {

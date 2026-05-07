@@ -1,14 +1,21 @@
 { pkgs, inputs, ... }:
+let
+  username = "alexandre";
+in
 {
   imports = [
     ./homebrew.nix
     ./packages.nix
     ./macos.nix
 
-    ./services/autoraise.nix
     ./services/nginx.nix
     ./services/redis.nix
+
+    ./wm
   ];
+
+  # Master switch for the AeroSpace + JankyBorders + AutoRaise stack.
+  wm.enable = false;
 
   system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
@@ -17,7 +24,7 @@
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "backup";
-    users.alexandre = import ../home-manager;
+    users.${username} = import ../home-manager;
   };
 
   networking = {
@@ -27,12 +34,12 @@
 
   system = {
     stateVersion = 6;
-    primaryUser = "alexandre";
+    primaryUser = username;
   };
 
-  users.users.alexandre = {
-    name = "alexandre";
-    home = "/Users/alexandre";
+  users.users.${username} = {
+    # `name` defaults to the attr key in nix-darwin's users module.
+    home = "/Users/${username}";
   };
 
   nix = {
@@ -45,7 +52,7 @@
       ];
       trusted-users = [
         "@admin"
-        "alexandre"
+        username
       ];
       extra-substituters = [
         "https://cache.lix.systems"

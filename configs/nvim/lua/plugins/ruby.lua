@@ -33,7 +33,30 @@ return {
           command = "mise",
           prepend_args = { "exec", "--", "bundle", "exec", "rubocop" },
         },
+        erb_format = {
+          command = "mise",
+          prepend_args = { "exec", "--", "erb-format" },
+        },
       },
     },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        erb_lint = {
+          cmd = "mise",
+          args = { "exec", "--", "erblint", "--format", "compact", "--no-color" },
+        },
+      },
+    },
+  },
+  {
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = vim.tbl_filter(function(tool)
+        return tool ~= "erb-formatter" and tool ~= "erb-lint"
+      end, opts.ensure_installed or {})
+    end,
   },
 }
