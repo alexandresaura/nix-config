@@ -7,13 +7,14 @@
       cleanup = "zap";
     };
 
-    taps = [ ];
+    taps = [ "theboredteam/boring-notch" ];
 
     brews = [ ];
 
     casks = [
       "1password"
       "arc"
+      "boring-notch"
       "bruno"
       "claude"
       "claude-code"
@@ -22,8 +23,6 @@
       "discord"
       "docker-desktop"
       "ghostty"
-      "insomnia"
-      "orion"
       "raycast"
       "spotify"
       "ticktick"

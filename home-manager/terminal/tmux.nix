@@ -106,6 +106,7 @@
 
       bind Q confirm-before -p "kill-session #S? (y/n)" kill-session
       bind * set-window-option synchronize-panes \; display-message "sync-panes #{?pane_synchronized,on,off}"
+      bind f choose-tree -Zw
 
 
       # ─── Bindings · copy mode (vi keys) ──────────────────────────

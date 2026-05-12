@@ -27,16 +27,16 @@ in
       };
 
       trackpad = {
-        Clicking = true;
+        Clicking = false;
         TrackpadRightClick = true;
-        TrackpadThreeFingerDrag = true;
+        TrackpadThreeFingerDrag = false;
 
-        TrackpadFourFingerHorizSwipeGesture = 2;
+        TrackpadFourFingerHorizSwipeGesture = 0;
         TrackpadFourFingerPinchGesture = 0;
         TrackpadFourFingerVertSwipeGesture = 2;
         TrackpadMomentumScroll = true;
-        TrackpadPinch = false;
-        TrackpadRotate = false;
+        TrackpadPinch = true;
+        TrackpadRotate = true;
         TrackpadThreeFingerHorizSwipeGesture = 2;
         TrackpadThreeFingerTapGesture = 2;
         TrackpadThreeFingerVertSwipeGesture = 2;
@@ -76,8 +76,6 @@ in
       controlcenter = {
         BatteryShowPercentage = true;
         Bluetooth = true;
-        NowPlaying = true;
-        Sound = true;
       };
 
       NSGlobalDomain = {

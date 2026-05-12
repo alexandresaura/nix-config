@@ -68,11 +68,11 @@
       # both services set KeepAlive.SuccessfulExit=false and exit 0 on SIGTERM,
       # so launchd leaves them stopped until we kickstart again.
       nginx-start = "launchctl kickstart gui/$(id -u)/org.nixos.nginx";
-      nginx-stop = "launchctl stop gui/$(id -u)/org.nixos.nginx";
+      nginx-stop = "launchctl kill SIGTERM gui/$(id -u)/org.nixos.nginx";
       nginx-restart = "launchctl kickstart -k gui/$(id -u)/org.nixos.nginx";
 
       redis-start = "launchctl kickstart gui/$(id -u)/org.nixos.redis";
-      redis-stop = "launchctl stop gui/$(id -u)/org.nixos.redis";
+      redis-stop = "launchctl kill SIGTERM gui/$(id -u)/org.nixos.redis";
       redis-restart = "launchctl kickstart -k gui/$(id -u)/org.nixos.redis";
     };
 

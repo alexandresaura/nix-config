@@ -35,12 +35,13 @@ in
 
         config = {
           home.file.".config/aerospace/aerospace.toml".source =
-            (pkgs.formats.toml { }).generate "aerospace.toml" (
-              (import ./config.nix)
-              // {
-                after-startup-command = config.wm.aerospace.afterStartup;
-              }
-            );
+            (pkgs.formats.toml { }).generate "aerospace.toml"
+              (
+                (import ./config.nix)
+                // {
+                  after-startup-command = config.wm.aerospace.afterStartup;
+                }
+              );
         };
       };
   };
