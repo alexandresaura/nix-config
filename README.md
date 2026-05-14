@@ -35,32 +35,32 @@ rebuild   # re-applies the configuration
 - **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `cache.lix.systems` + `nix-community.cachix.org` as extra binary caches
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation
   - **Casks**:
-    - *Browsers* &mdash; Arc
-    - *Dev & AI* &mdash; Bruno, Claude (Desktop), Claude Code, Cursor, Docker Desktop, Ghostty, VS Code
-    - *Utilities* &mdash; 1Password, Boring Notch, CleanShot, Raycast, TickTick
-    - *Communication & media* &mdash; Discord, Spotify
+    - _Browsers_ &mdash; Arc
+    - _Dev & AI_ &mdash; Bruno, Claude (Desktop), Claude Code, Cursor, Docker Desktop, Ghostty, VS Code
+    - _Utilities_ &mdash; 1Password, Boring Notch, CleanShot, Raycast, TickTick
+    - _Communication & media_ &mdash; Discord, Spotify
   - **Window manager taps/casks** are added by the WM module (below) when `wm.enable = true`.
 - **Window manager** (`darwin/wm/`) &mdash; AeroSpace tiling + JankyBorders focus outline + AutoRaise focus-follows-mouse. Single `wm.enable` master switch with per-helper toggles (`wm.borders.enable`, `wm.autoraise.enable`). Alt+h/j/k/l focus, Alt+1..5 workspaces. Manage the whole stack with the `wm-{start,stop,restart}` aliases.
 - **Background services** &mdash; nginx and redis run as launchd user agents (`darwin/services/`); configs live outside the repo at `~/.config/{nginx,redis}/`. Manage with `{nginx,redis}-{start,stop,restart}` aliases.
 - **macOS preferences** (`darwin/macos.nix`):
-  - *Appearance* &mdash; dark mode; dock auto-hide + `static-only` (running apps only; Raycast handles launching); menu-bar clock with day of week; Stage Manager off; one Space per display
-  - *Trackpad & input* &mdash; no pointer acceleration, fast cursor; Caps Lock remapped to Control; fast key repeat
-  - *Finder* &mdash; list view with hidden files, search-current-folder default, POSIX path in title, no extension-change warning
-  - *NSGlobalDomain* &mdash; autocorrect / smart quotes / inline prediction off; save & print dialogs default-expanded; new docs save locally (not iCloud); 24-hour metric locale
-  - *Control Center* &mdash; battery %, Bluetooth pinned to menu bar
-  - *Security* &mdash; Touch ID + Apple Watch for sudo; immediate screensaver password lock; bottom-right hot corner = Lock Screen; Guest login disabled; `LSQuarantine` off
-  - *Misc* &mdash; screenshots to `~/Pictures/Screenshots`; no `.DS_Store` on network/USB; Activity Monitor sorted by CPU; macOS auto-install off
+  - _Appearance_ &mdash; dark mode; dock auto-hide + `static-only` (running apps only; Raycast handles launching); menu-bar clock with day of week; Stage Manager off; one Space per display
+  - _Trackpad & input_ &mdash; no pointer acceleration, fast cursor; Caps Lock remapped to Control; fast key repeat
+  - _Finder_ &mdash; list view with hidden files, search-current-folder default, POSIX path in title, no extension-change warning
+  - _NSGlobalDomain_ &mdash; autocorrect / smart quotes / inline prediction off; save & print dialogs default-expanded; new docs save locally (not iCloud); 24-hour metric locale
+  - _Control Center_ &mdash; battery %, Bluetooth pinned to menu bar
+  - _Security_ &mdash; Touch ID + Apple Watch for sudo; immediate screensaver password lock; bottom-right hot corner = Lock Screen; Guest login disabled; `LSQuarantine` off
+  - _Misc_ &mdash; screenshots to `~/Pictures/Screenshots`; no `.DS_Store` on network/USB; Activity Monitor sorted by CPU; macOS auto-install off
   - AeroSpace-specific defaults (Sequoia edge-drag tiling, `mru-spaces`, `expose-group-apps`) live in `darwin/wm/macos-defaults.nix` and toggle with `wm.enable`
 
 ### User Environment (Home Manager)
 
-| Category | Tools |
-|----------|-------|
-| **Shells** | fish (Dracula theme), zsh (autosuggestions, syntax highlighting) |
-| **Terminal** | Ghostty, tmux (powerkit + Dracula, vim-tmux-navigator, resurrect/continuum), Starship prompt, fzf, eza, zoxide (aliased to `cd`), bat, btop |
-| **Dev** | git (SSH signing via 1Password, gh credential helper for github.com), SSH (1Password agent), 1Password shell plugins (gh), mise (erlang, node, python, ruby, rust, elixir, plus `gem:`/`pipx:` backend installs for ruby-lsp, erb-formatter, erb_lint, aws-okta-processor), direnv, lazygit, Claude Code (Dracula statusline with starship + jq), EditorConfig (global `~/.editorconfig`) |
-| **Editor** | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code, vim-tmux-navigator; Ruby/ERB tooling routed through `mise exec`) |
-| **CLI tools** | awscli2, curl, fastfetch, fd, gh, gitleaks, jq, lazysql, libyaml, pipx, ripgrep, tree-sitter, wget, yarn |
+| Category      | Tools                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Shells**    | fish (Dracula theme), zsh (autosuggestions, syntax highlighting)                                                                                                                                                                                                                                                                                                                                   |
+| **Terminal**  | Ghostty, tmux (powerkit + Dracula, vim-tmux-navigator, resurrect/continuum), Starship prompt, fzf, eza, zoxide (aliased to `cd`), bat, btop                                                                                                                                                                                                                                                        |
+| **Dev**       | git (SSH signing via 1Password, gh credential helper for github.com), SSH (1Password agent), 1Password shell plugins (gh), mise (erlang, node, python, ruby, rust, elixir, plus `gem:`/`pipx:` backend installs for ruby-lsp, rubocop, erb-formatter, erb_lint, aws-okta-processor), direnv, lazygit, Claude Code (Dracula statusline with starship + jq), EditorConfig (global `~/.editorconfig`) |
+| **Editor**    | Neovim (LazyVim with Dracula, 30+ extras including LSPs, copilot, claude-code, vim-tmux-navigator; Ruby/ERB tooling routed through `mise exec`)                                                                                                                                                                                                                                                    |
+| **CLI tools** | awscli2, curl, fastfetch, fd, gh, gitleaks, jq, lazysql, libyaml, pipx, ripgrep, tree-sitter, wget, yarn                                                                                                                                                                                                                                                                                           |
 
 All terminal tools share a consistent **Dracula** color theme via a single palette module at `home-manager/theme/dracula.nix`, exposed to every home-manager module as `dracula`.
 

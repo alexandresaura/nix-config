@@ -1,3 +1,15 @@
+local function gem_bundled(lockfile, pattern)
+  if not lockfile or not vim.uv.fs_stat(lockfile) then
+    return false
+  end
+  for _, line in ipairs(vim.fn.readfile(lockfile)) do
+    if line:match(pattern) then
+      return true
+    end
+  end
+  return false
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -7,14 +19,8 @@ return {
           cmd = { "mise", "exec", "--", "ruby-lsp" },
           mason = false,
           on_new_config = function(config, root_dir)
-            local lockfile = root_dir .. "/Gemfile.lock"
-            if vim.uv.fs_stat(lockfile) then
-              for _, line in ipairs(vim.fn.readfile(lockfile)) do
-                if line:match("ruby%-lsp") then
-                  config.cmd = { "mise", "exec", "--", "bundle", "exec", "ruby-lsp" }
-                  return
-                end
-              end
+            if gem_bundled(root_dir .. "/Gemfile.lock", "ruby%-lsp") then
+              config.cmd = { "mise", "exec", "--", "bundle", "exec", "ruby-lsp" }
             end
           end,
         },
@@ -31,7 +37,13 @@ return {
       formatters = {
         rubocop = {
           command = "mise",
-          prepend_args = { "exec", "--", "bundle", "exec", "rubocop" },
+          prepend_args = function(_, ctx)
+            local lockfile = vim.fs.find("Gemfile.lock", { upward = true, path = ctx.dirname })[1]
+            if gem_bundled(lockfile, "rubocop") then
+              return { "exec", "--", "bundle", "exec", "rubocop" }
+            end
+            return { "exec", "--", "rubocop" }
+          end,
         },
         erb_format = {
           command = "mise",

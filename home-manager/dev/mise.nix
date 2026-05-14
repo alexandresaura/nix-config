@@ -26,6 +26,7 @@
         # Backend-installed CLIs
         "gem:erb-formatter" = "latest";
         "gem:erb_lint" = "latest";
+        "gem:rubocop" = "latest";
         "gem:ruby-lsp" = "latest";
         "pipx:aws-okta-processor" = "latest";
       };

@@ -27,19 +27,6 @@
       yank
       vim-tmux-navigator
       {
-        plugin = resurrect;
-        extraConfig = ''
-          set -g @resurrect-capture-pane-contents 'on'
-          set -g @resurrect-strategy-nvim 'session'
-        '';
-      }
-      {
-        plugin = continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-        '';
-      }
-      {
         plugin = inputs.tmux-powerkit.packages.${pkgs.stdenv.hostPlatform.system}.default;
         extraConfig = ''
           set -g @powerkit_theme "dracula"
@@ -58,6 +45,19 @@
           set -g @powerkit_plugins "git,group(cpu,memory),group(battery,datetime)"
 
           set -g @powerkit_keybinding_conflict_action "skip"
+        '';
+      }
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-strategy-nvim 'session'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
         '';
       }
     ];

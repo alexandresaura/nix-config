@@ -38,7 +38,7 @@ in
         TrackpadPinch = true;
         TrackpadRotate = true;
         TrackpadThreeFingerHorizSwipeGesture = 2;
-        TrackpadThreeFingerTapGesture = 2;
+        TrackpadThreeFingerTapGesture = 0;
         TrackpadThreeFingerVertSwipeGesture = 2;
         TrackpadTwoFingerDoubleTapGesture = false;
         TrackpadTwoFingerFromRightEdgeSwipeGesture = 0;
