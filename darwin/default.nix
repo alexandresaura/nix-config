@@ -32,7 +32,7 @@ in
   };
 
   system = {
-    stateVersion = 6;
+    stateVersion = 7;
     primaryUser = username;
   };
 
