@@ -48,7 +48,9 @@
       lazysql
       libyaml
       nixfmt
-      pipx
+      # pipx 1.8.0 tests broke on nixpkgs after 2026-04-16 (packaging
+      # module parsing regression). Drop the override once upstream fixes.
+      (pipx.overridePythonAttrs (_: { doCheck = false; }))
       pre-commit
       ripgrep
       statix
