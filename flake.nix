@@ -17,6 +17,7 @@
     };
     tmux-powerkit = {
       url = "github:fabioluciano/tmux-powerkit";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
