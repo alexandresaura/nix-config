@@ -18,6 +18,7 @@
         # Language runtimes
         elixir = "latest";
         erlang = "latest";
+        go = "latest";
         node = "latest";
         python = "latest";
         ruby = "latest";

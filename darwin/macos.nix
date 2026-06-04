@@ -88,7 +88,7 @@ in
         AppleMeasurementUnits = "Centimeters";
         AppleMetricUnits = 1;
         AppleScrollerPagingBehavior = true;
-        AppleShowScrollBars = "Always";
+        AppleShowScrollBars = "WhenScrolling";
         AppleSpacesSwitchOnActivate = true;
         AppleTemperatureUnit = "Celsius";
         ApplePressAndHoldEnabled = false;
