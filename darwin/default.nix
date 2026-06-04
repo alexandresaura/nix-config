@@ -50,26 +50,23 @@ in
         "nix-command"
         "flakes"
       ];
-      trusted-users = [
-        "@admin"
-        username
-      ];
-      extra-substituters = [
-        "https://cache.lix.systems"
-        "https://nix-community.cachix.org"
-      ];
-      extra-trusted-public-keys = [
-        "cache.lix.systems-1:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRpIarfA="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+      trusted-users = [ "@admin" ];
+      warn-dirty = false;
     };
-    optimise.automatic = true;
+    optimise = {
+      automatic = true;
+      interval = {
+        Weekday = 2;
+        Hour = 13;
+        Minute = 30;
+      };
+    };
     gc = {
       automatic = true;
       options = "--delete-older-than 14d";
       interval = {
-        Weekday = 0;
-        Hour = 2;
+        Weekday = 2;
+        Hour = 13;
         Minute = 0;
       };
     };

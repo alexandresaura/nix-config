@@ -32,7 +32,7 @@ rebuild   # re-applies the configuration
 - **Packages** &mdash; coreutils
 - **Fonts** &mdash; JetBrains Mono Nerd Font
 - **Shells** &mdash; bash, zsh, fish (with babelfish)
-- **Nix daemon** &mdash; Lix, with automatic store optimisation, weekly GC, and `cache.lix.systems` + `nix-community.cachix.org` as extra binary caches
+- **Nix daemon** &mdash; Lix, with automatic store optimisation and weekly GC (uses `cache.nixos.org` only)
 - **Homebrew** &mdash; managed declaratively with auto-update, auto-upgrade, and cleanup on activation
   - **Casks**:
     - _Browsers_ &mdash; Arc
