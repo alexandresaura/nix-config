@@ -35,7 +35,7 @@
     # `home.username` and `home.homeDirectory` are auto-populated by the
     # nix-darwin HM integration from `users.users.<name>.{name,home}`
     # (see home-manager/nixos/common.nix). Don't redeclare them here.
-    stateVersion = "25.11";
+    stateVersion = "26.11";
 
     packages = with pkgs; [
       awscli2
