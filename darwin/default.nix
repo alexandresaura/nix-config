@@ -23,7 +23,6 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
-    backupFileExtension = "backup";
     users.${username} = import ../home-manager;
   };
 
