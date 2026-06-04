@@ -31,6 +31,10 @@
 
   programs.home-manager.enable = true;
 
+  # macOS ships /usr/bin/man; HM's programs.man.package defaults to null
+  # on Darwin (stateVersion >= 26.05), which makes cache generation a no-op.
+  programs.man.generateCaches = false;
+
   home = {
     # `home.username` and `home.homeDirectory` are auto-populated by the
     # nix-darwin HM integration from `users.users.<name>.{name,home}`
@@ -50,7 +54,9 @@
       nixfmt
       # pipx 1.8.0 tests broke on nixpkgs after 2026-04-16 (packaging
       # module parsing regression). Drop the override once upstream fixes.
-      (pipx.overridePythonAttrs (_: { doCheck = false; }))
+      (pipx.overridePythonAttrs (_: {
+        doCheck = false;
+      }))
       pre-commit
       ripgrep
       statix

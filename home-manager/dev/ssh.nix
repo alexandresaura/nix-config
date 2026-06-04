@@ -14,21 +14,21 @@ in
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
-      "*".identityAgent = onePassPath;
+    settings = {
+      "*".IdentityAgent = onePassPath;
 
       personalgit = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/personalgit.pub";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/personalgit.pub";
+        IdentitiesOnly = true;
       };
 
       workgit = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/workgit.pub";
-        identitiesOnly = true;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/workgit.pub";
+        IdentitiesOnly = true;
       };
     };
   };
