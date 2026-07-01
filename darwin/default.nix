@@ -44,6 +44,11 @@ in
   nix = {
     enable = true;
     package = pkgs.lix;
+    # Pure-flakes setup: no legacy channels. Drops the dead
+    # `/nix/var/nix/profiles/per-user/root/channels` NIX_PATH entry
+    # (and the unused nix-channel binary); `<nixpkgs>` still resolves
+    # via the `nixpkgs=flake:nixpkgs` registry indirection.
+    channel.enable = false;
     settings = {
       experimental-features = [
         "nix-command"

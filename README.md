@@ -37,7 +37,7 @@ rebuild   # re-applies the configuration
   - **Casks**:
     - _Browsers_ &mdash; Arc
     - _Dev & AI_ &mdash; Bruno, Claude (Desktop), Claude Code, Cursor, Docker Desktop, Ghostty, VS Code
-    - _Utilities_ &mdash; 1Password, Boring Notch, CleanShot, Raycast, TickTick
+    - _Utilities_ &mdash; 1Password, CleanShot, Raycast, TickTick
     - _Communication & media_ &mdash; Discord, Spotify
   - **Window manager taps/casks** are added by the WM module (below) when `wm.enable = true`.
 - **Window manager** (`darwin/wm/`) &mdash; AeroSpace tiling + JankyBorders focus outline + AutoRaise focus-follows-mouse. Single `wm.enable` master switch with per-helper toggles (`wm.borders.enable`, `wm.autoraise.enable`). Alt+h/j/k/l focus, Alt+1..5 workspaces. Manage the whole stack with the `wm-{start,stop,restart}` aliases.
