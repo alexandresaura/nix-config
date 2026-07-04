@@ -25,6 +25,7 @@
     ./dev/onepassword.nix
     ./dev/claude-code.nix
     ./dev/editorconfig.nix
+    ./dev/language-servers.nix
 
     ./editors/neovim.nix
   ];

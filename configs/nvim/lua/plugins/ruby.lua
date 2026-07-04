@@ -16,7 +16,7 @@ return {
     opts = {
       servers = {
         ruby_lsp = {
-          cmd = { "mise", "exec", "--", "ruby-lsp" },
+          cmd = { "ruby-lsp" },
           mason = false,
           on_new_config = function(config, root_dir)
             if gem_bundled(root_dir .. "/Gemfile.lock", "ruby%-lsp") then
